@@ -5,11 +5,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardUpLeftHandler;
 
 public class App {
     public static void main(String[] args) {
-        new KeyPair().createFiles();
+        KeyPair kp = new KeyPair();
+        try {
+			Files.write(Paths.get("sk.txt"), kp.getPrivateKey().toString().getBytes());
+			Files.write(Paths.get("pk.txt"), kp.getPublicKey().toString().getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     public static String getFileContent(File file){
@@ -22,13 +32,5 @@ public class App {
             e.printStackTrace();
         }
         return res;
-    }
-    
-    public static void saveToFile(String text, File file) {
-        try {
-            new FileWriter(file).write(text);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

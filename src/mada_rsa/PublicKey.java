@@ -17,4 +17,9 @@ public class PublicKey {
 	public BigInteger getE() {
 		return e;
 	}
+	
+	@Override
+	public String toString() {
+		return n + "," + e;
+	}
 }

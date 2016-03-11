@@ -26,4 +26,9 @@ public class PrivateKey {
 	public BigInteger getD() {
 		return d;
 	}
+	
+	@Override
+	public String toString() {
+		return n + "," + d;
+	}
 }

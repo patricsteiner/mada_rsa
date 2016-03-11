@@ -1,9 +1,5 @@
 package mada_rsa;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -20,16 +16,11 @@ public class KeyPair {
 	public KeyPair() {
 		Random rnd = new Random();
 		p = BigInteger.probablePrime(1024, rnd); //get first random prime
-		//System.out.println(p);
 		do {q = BigInteger.probablePrime(1024, rnd);} while (q.equals(p)); //get second random prime, make sure it's different from p
-		//System.out.println(q);
 		n = p.multiply(q);
 		phi = p.subtract(new BigInteger("1")).multiply(q.subtract(new BigInteger("1")));
-		//System.out.println(phi);
-		//System.out.println(gcd(new BigInteger("9"),new BigInteger("31")));
 		privateKey = new PrivateKey(n,d);
 		publicKey = new PublicKey(n, e);
-		System.out.println(publicKey.getN());
 	}
 	
 	public PrivateKey getPrivateKey() {
@@ -41,7 +32,7 @@ public class KeyPair {
 	}
 	
 	private BigInteger gcd(BigInteger a, BigInteger b) {
-		// extended euclidian algorithm
+		// extended euclidian algorithm, "copied" pseudo code from slides
 		if (a.compareTo(b) < 0) {BigInteger tmp=a; a=b;b=tmp;} //make sure a is greater than b
 		BigInteger x0 = new BigInteger("1");
 		BigInteger y0 = new BigInteger("0");
@@ -59,16 +50,5 @@ public class KeyPair {
 			y1 = y0.subtract(q.multiply(y1));
 		}
 		return a;
-	}
-	
-	public void createFiles() {
-	    File sk = new File("C:\\temp\\sk.txt");
-	    File pk = new File("C:\\temp\\pk.txt");
-	    try {
-            new FileWriter(sk).write("("+privateKey.getN()+","+privateKey.getD()+")");
-            new FileWriter(pk).write("("+publicKey.getN()+","+publicKey.getE()+")");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 	}
 }
