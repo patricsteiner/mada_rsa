@@ -1,11 +1,9 @@
 package mada_rsa;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
 import java.math.BigInteger;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class PrivateKey {
 	private BigInteger n;
@@ -16,15 +14,14 @@ public class PrivateKey {
 		this.d = d;
 	}
 	
-	public PrivateKey(Path path) {
+	public PrivateKey(String path) {
 	    String s = null;
 		try {
-			s = Files.readAllLines(path).get(0);
-			s = s.substring(1, s.length()-2); //remove brackets
-		    n = new BigInteger (s.split(",")[0]);
-		    d = new BigInteger (s.split(",")[1]);
+			s = Files.readAllLines(Paths.get(path)).get(0);
+			s = s.substring(1, s.length() - 1); //remove brackets
+		    n = new BigInteger(s.split(",")[0]);
+		    d = new BigInteger(s.split(",")[1]);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

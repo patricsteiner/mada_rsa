@@ -11,7 +11,7 @@ public class KeyPair {
 	private BigInteger n;
 	private BigInteger phi;
 	private BigInteger d;
-	private BigInteger e = new BigInteger("3");
+	private BigInteger e = new BigInteger("13");
 	
 	public KeyPair() {
 		Random rnd = new Random();
@@ -33,7 +33,7 @@ public class KeyPair {
 	}
 	
 	private BigInteger euclid(BigInteger a, BigInteger b) {
-		// extended euclidian algorithm, "copied" pseudo code from slides
+		// extended euclidian algorithm, "copied" pseudo code from slide 1.26
 		if (a.compareTo(b) < 0) {BigInteger tmp=a; a=b;b=tmp;} //make sure a is greater than b
 		BigInteger x0 = new BigInteger("1");
 		BigInteger y0 = new BigInteger("0");
