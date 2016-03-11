@@ -20,6 +20,6 @@ public class PublicKey {
 	
 	@Override
 	public String toString() {
-		return n + "," + e;
+		return "(" + n + "," + e + ")";
 	}
 }
