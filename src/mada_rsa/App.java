@@ -1,9 +1,5 @@
 package mada_rsa;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 /**
  * FHNW
  * Mathematik für die Datenkommunikation
@@ -20,7 +16,7 @@ public class App {
     	//task1();
     	//task2();
     	//task3();
-    	//task4();
+    	task4();
     }
     
     // Task #1: Generate random public and private key, save to sk.txt and pk.txt

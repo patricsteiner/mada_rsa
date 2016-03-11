@@ -8,8 +8,8 @@ public class Rsa {
 		for (int i = 0; i < message.length(); i++) {
 			encryptedMessage += squareAndMultiply(
 					new BigInteger(Integer.toString(message.charAt(i))), //make char ascii value to BigInteger
-					publicKey.getN(), 
-					publicKey.getE())
+					publicKey.n, 
+					publicKey.e)
 					+ ",";
 		}
 		encryptedMessage = encryptedMessage.substring(0, encryptedMessage.length() - 1); //cut last comma
@@ -20,7 +20,7 @@ public class Rsa {
 		String decryptedMessage = "";
 		for (String s : message.split(",")) {
 			decryptedMessage += Character.toString((char)
-					squareAndMultiply(new BigInteger(s), privateKey.getN(), privateKey.getD()
+					squareAndMultiply(new BigInteger(s), privateKey.n, privateKey.d
 					).intValue());
 		}
 		return decryptedMessage;
