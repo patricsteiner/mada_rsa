@@ -11,7 +11,8 @@ public class KeyPair {
 	private BigInteger n;
 	private BigInteger phi;
 	private BigInteger d;
-	private BigInteger e = new BigInteger("11"); // use 11 as default
+	private BigInteger e = new BigInteger("65537");
+	// use e=65537 as default, smaller numbers seem to produce weird results sometimes (same encoded message for different keys?!)
 	
 	/**
 	 * Generates a random RSA KeyPair, consisting of a PrivateKey and a PublicKey
@@ -26,7 +27,7 @@ public class KeyPair {
 			phi = p.subtract(new BigInteger("1")).multiply(q.subtract(new BigInteger("1"))); // phi = phi(n) = (p-1)(q-1)
 		}
 		while (!euclid(phi, e, false).equals(new BigInteger("1")) // make sure it's "teilerfremd" from e (gcd must be 1)
-			|| q.equals(p)); // and also make sure it's not the same as p
+				|| q.equals(p)); // and also make sure it's not the same as p
 		n = p.multiply(q); // product of the two chosen primes	
 		d = euclid(phi, e, true); // find d that matches: e * d mod phi(n) = 1 mod phi(n)
 		privateKey = new PrivateKey(n, d);
