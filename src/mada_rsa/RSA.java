@@ -53,8 +53,8 @@ public class RSA {
 		BigInteger h = new BigInteger("1");
 		BigInteger k = x; // used because it's the same in the slides (convention?)
 		while (i >= 0) {
-			if (e.toString(2).charAt(i) == '1') h = h.multiply(k).mod(m);
-			k = k.multiply(k).mod(m);
+			if (e.toString(2).charAt(i) == '1') h = h.multiply(k).mod(m); // multiply only if bit is 1
+			k = k.multiply(k).mod(m); // square in every iteration
 			i--;
 		}
 		return h; //x^e mod m
